@@ -56,6 +56,8 @@ nav:
       - DevOps Registration: "getStarted/devopsRegistration.md"
       - Kubernetes and Helm Basics: getStarted/k8sHelmBasics.md
       - Local Kubernetes Cluster: getStarted/localK8sCluster.md
+  - Deployment:
+      - Metrics/Logs - Splunk: "deployment/collectMetricsWithSplunk.md"
   - Release Notes:
       - Current: "releaseNotes/2107.md"
       - Version 2106: "releaseNotes/2106.md"
