@@ -53,6 +53,7 @@ nav:
       - Contributing: contributing.md
   - Get Started:
       - Introduction: "getStarted/getStarted.md"
+      - DevOps Registration: "getStarted/devopsRegistration.md"
   - Release Notes:
       - Current: "releaseNotes/relnotes-2107.md"
       - Version 2106: "releaseNotes/relnotes-2106.md"
