@@ -31,6 +31,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.superfences
+  - pymdownx.snippets
   - meta
   - toc:
       # insert a blank space before the character
@@ -57,6 +58,7 @@ nav:
       - Kubernetes and Helm Basics: getStarted/k8sHelmBasics.md
       - Local Kubernetes Cluster: getStarted/localK8sCluster.md
   - Deployment:
+      - Introduction: "deployment/deploy.md"
       - Metrics/Logs - Splunk: "deployment/collectMetricsWithSplunk.md"
   - Release Notes:
       - Current: "releaseNotes/2107.md"

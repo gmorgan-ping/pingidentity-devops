@@ -22,13 +22,13 @@ This document descibes deploying a cluster with [kind](https://kind.sigs.k8s.io/
 
 Start by [installing kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) on your platform.
 
-Then, create a kind cluster with our sample `.yaml` file to enable ingress (app exposure).
+Then, create a kind cluster with `snippets/kind.yaml` file to allow ingress (app exposure).
 
 ```
-kind create cluster --config=10-kubernetes/99-tools/kind.yaml
+kind create cluster --config=snippets/kind.yaml
 ```
 
-Test cluster health with: 
+Once ready, test cluster health with: 
 
 ```
 kubectl cluster-info
@@ -39,7 +39,7 @@ kubectl get nodes
 Next, Install the nginx-ingress-controller for `kind`
 
 ```
-kubectl apply -f 10-kubernetes/99-tools/kind-nginx.yaml
+kubectl apply -f snippets/kind-nginx.yaml
 ```
 
 Wait for nginx to become healthy: 
@@ -51,11 +51,14 @@ kubectl wait --namespace ingress-nginx \
   --timeout=90s
 ```
 
-check if nginx-ingress-controller is working:
+Check if nginx-ingress-controller is working:
 
 ```
 curl localhost
+```
 
+Returns: 
+```
 <html>
 <head><title>404 Not Found</title></head>
 <body>
