@@ -51,6 +51,8 @@ nav:
       - Disclaimer: disclaimer.md
       - Third-Party Software: 3rdPartySoftware.md
       - Contributing: contributing.md
+  - Deployment:
+      - Metrics/Logs - Splunk: "deployment/collectMetricsWithSplunk.md"
   - Release Notes:
       - Current: "releaseNotes/2107.md"
       - Version 2106: "releaseNotes/2106.md"
