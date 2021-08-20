@@ -51,6 +51,9 @@ nav:
       - Disclaimer: disclaimer.md
       - Third-Party Software: 3rdPartySoftware.md
       - Contributing: contributing.md
+  - Get Started:
+      - Introduction: "getStarted/getStarted.md"
+      - DevOps Registration: "getStarted/devopsRegistration.md"
   - Deployment:
       - Metrics/Logs - Splunk: "deployment/collectMetricsWithSplunk.md"
   - Release Notes:
