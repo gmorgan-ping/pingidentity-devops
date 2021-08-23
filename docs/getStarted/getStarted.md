@@ -3,22 +3,22 @@ title: Get Started
 ---
 # Get Started
 
-You can quickly deploy Docker images of Ping Identity products. We use Kubernetes to deploy our Docker images in stable, network-enabled containers. Our Docker images are preconfigured to provide working instances of our products, either as single containers or in orchestrated sets.
+Ping Identity Docker images are preconfigured to provide working instances of our products, either as single containers or in orchestrated sets. This documentation is intented to help Ping Identity DevOps consumers learn how to use Ping Identity Docker images in Kubernetes, identify appropriate infrastructure configurations, and prepare for ongoing management of services. Usage of Kubernetes may not be explicitly required, but it is recommended along with Helm to provide the best experience without deep customization.
 
-!!! info "Deprecation Notice"
-    The Ping Identity DevOps Getting Started Repository is shifting from docker-compose and Kustomize to all Kubernetes and Helm. This shift removes the support needed for these ineffective service and allows Ping Identity to provide greater focus on patterns that are more production-ready. If needed, older examples can be found in tags <2108.
+<!-- !!! info "Deprecation Notice"
+    The Ping Identity DevOps Getting Started Repository is shifting from docker-compose and Kustomize to all Kubernetes and Helm. This shift removes the support needed for these ineffective service and allows Ping Identity to provide greater focus on patterns that are more production-ready. If needed, older examples can be found in tags <2108. -->
 
-This documentation is intented to help Ping Identity DevOps consumers learn how to use Ping Identity Docker images in Kubernetes, identify appropriate infrastructure configurations, and prepare for ongoing management of services.
+Suggested path for reading through this documentation:
 
-Here is a suggested path for reading through this documentation:
+  * [Prerequisites](#prerequisites) - Start with the Prerequisites on this page for success though additional examples
 
-  * [Prerequisites](#prerequisites) - General Prerequisites needed for success accross examples
+  * [Deploy Simple Stack](#deploy-simple-stack) - Get your feet wet with a small example
 
-  * [Deploy Simple Stack](#deploy-simple-stack)
+  * [Kubernetes and Helm Basics](k8sHelmBasics.md) - **Optional** The bare essential knowledge specific to Ping Identity in DevOps to kickstart those new to Kubernetes and Helm. 
 
-  * 
+  * [Deployments](docs/deployment/deploy.md) - Guidance on what we have identified as the common questions asked by every consumer looking to have a successful produciton deployment. 
 
-
+  * [Container Anatomy]()
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Here is a suggested path for reading through this documentation:
 
 ## Set Up Your Devops Environment
 
-Evaluation licenses are pulled at container startup if a valid Ping Identity DevOps User and Key is provided. For more information, see [DevOps Registration](devopsRegistration.md). Prepare your user and key to be used by deployments via a Kubernetes secret with the name `devops-secret`.
+Evaluation licenses are pulled from Ping's license server at container startup if a valid Ping Identity DevOps User and Key is provided. For more information, see [DevOps Registration](devopsRegistration.md). Prepare your user and key to be used by deployments via a Kubernetes secret with the name `devops-secret`.
       
       ```
        kubectl create secret generic devops-secret \
@@ -45,7 +45,8 @@ Evaluation licenses are pulled at container startup if a valid Ping Identity Dev
         --from-literal=PING_IDENTITY_ACCEPT_EULA=YES
       ```
 
-Eventually, full licenses will be desired, this usage 
+!!!info Production Licenses
+    Eventually, full licenses will be desired. Usage can be found [here](../reference/existingLicense.md)
 
 Add our [Helm chart repository](https://helm.pingidentity.com/)
       
