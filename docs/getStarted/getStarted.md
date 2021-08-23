@@ -36,7 +36,7 @@ Suggested path for reading through this documentation:
 
 ## Set Up Your Devops Environment
 
-Evaluation licenses are pulled at container startup if a valid Ping Identity DevOps User and Key is provided. For more information, see [DevOps Registration](devopsRegistration.md). Prepare your user and key to be used by deployments via a Kubernetes secret with the name `devops-secret`.
+Evaluation licenses are pulled from Ping's license server at container startup if a valid Ping Identity DevOps User and Key is provided. For more information, see [DevOps Registration](devopsRegistration.md). Prepare your user and key to be used by deployments via a Kubernetes secret with the name `devops-secret`.
       
       ```
        kubectl create secret generic devops-secret \
@@ -45,7 +45,8 @@ Evaluation licenses are pulled at container startup if a valid Ping Identity Dev
         --from-literal=PING_IDENTITY_ACCEPT_EULA=YES
       ```
 
-Eventually, full licenses will be desired, this usage 
+!!!info Production Licenses
+    Eventually, full licenses will be desired. Usage can be found [here](../reference/existingLicense.md)
 
 Add our [Helm chart repository](https://helm.pingidentity.com/)
       
