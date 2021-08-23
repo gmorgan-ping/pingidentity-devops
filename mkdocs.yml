@@ -1,7 +1,9 @@
 site_name: Ping Identity DevOps
-repo_name: pingidentity/pingidentity-devops-getting-started
-repo_url: https://github.com/pingidentity/pingidentity-devops-getting-started
-site_url: https://devops.pingidentity.com/
+#repo_name: pingidentity/pingidentity-devops-getting-started
+#repo_url: https://github.com/pingidentity/pingidentity-devops-getting-started
+repo_name: gmorgan-ping/pingidentity-devops
+repo_url: https://github.com/gmorgan-ping/pingidentity-devops
+#site_url: https://devops.pingidentity.com/
 copyright: © Copyright 2021 Ping Identity
 #google_analytics: ['UA-156953351-1', 'devops.pingidentity.com']
 extra_css:
@@ -16,9 +18,22 @@ theme:
     - navigation.tabs
     - instant
 
+  #palette:
+  #  primary: indigo
+  #  accent: blue
+
   palette:
-    primary: indigo
-    accent: blue
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: slate)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
 
 edit_uri: ""
 
