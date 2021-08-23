@@ -74,7 +74,6 @@ nav:
       - Local Kubernetes Cluster: getStarted/localK8sCluster.md
   - Deployment:
       - Introduction: "deployment/deploy.md"
-      - 
       - Metrics/Logs - Splunk: "deployment/collectMetricsWithSplunk.md"
   - Release Notes:
       - Current: "releaseNotes/2107.md"
