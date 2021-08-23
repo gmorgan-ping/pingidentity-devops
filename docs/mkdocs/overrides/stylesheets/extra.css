@@ -8,6 +8,8 @@
     --md-mkdocs-footer-bg-color: #232629;
     --md-code-bg-color: #1f2224;
     --md-code-fg-color: #eeeeee;
+    --md-icon-box-border-color: black;
+    --md-link-hover: #e9eda4;
 }
 
 [data-md-color-scheme="default"] {
@@ -17,6 +19,8 @@
     --md-link-highlight-color: #B8232F;
     --md-footer-bg-color: #232629;
     --md-mkdocs-footer-bg-color: #232629;
+    --md-icon-box-border-color: black;
+    --md-link-hover: #d02735
 }
 
 .md-typeset h1 {
@@ -98,7 +102,7 @@
 
 .md-typeset a:hover {
     /* Hyperlink link color */
-    color: #d02735;
+    color: var(--md-link-hover);
 }
 
 .md-tabs__link--active {
@@ -118,7 +122,7 @@
 
 .md-clipboard.md-icon:hover {
     /* Copy to clipboard hover color */
-    color: #d02735
+    color: var(--md-link-highlight-color)
 }
 
 .highlight .m {
@@ -134,7 +138,7 @@
 
 div.banner,
 div.iconbox {
-    border-color: black;
+    border-color: var(--md-icon-box-border-color);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
@@ -160,7 +164,7 @@ div.iconbox {
 
 div.banner:hover,
 div.iconbox:hover {
-    border-color: #B8232F;
+    border-color: var(--md-link-highlight-color);
     box-shadow: 0 8px 6px -6px #616161;
 }
 
@@ -174,7 +178,7 @@ div.iconbox:hover {
 }
 
 a.assetlinks:visited {
-    color: #B8232F;
+    color: var(--md-typeset-h1-color);
 }
 
 [data-md-color-accent=blue] {
