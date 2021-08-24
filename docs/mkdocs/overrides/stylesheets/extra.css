@@ -1,26 +1,61 @@
 [data-md-color-scheme="slate"] {
-    /* --md-accent-fg-color: #004400; */
+    /* Accent color (used for permalink icons) */
+    --md-accent-fg-color: #f4f7bc;
+    /* Content background color */
     --md-default-bg-color: #474f51;
+    /* H1 text color */
     --md-typeset-h1-color: #d9dddd;
+    /* Default text color */
     --md-default-fg-color: white;
+    /* Hyperlink color */
     --md-link-highlight-color: #f4f7bc;
-    --md-footer-bg-color: #3f4447;
-    --md-mkdocs-footer-bg-color: #232629;
-    --md-code-bg-color: #1f2224;
-    --md-code-fg-color: #eeeeee;
-    --md-icon-box-border-color: black;
+    /* Hyperlink hover color */
     --md-link-hover: #e9eda4;
+    /* Footer background color */
+    --md-footer-bg-color: #3f4447;
+    /* MkDocs footer background color */
+    --md-mkdocs-footer-bg-color: #232629;
+    /* Code block background color */
+    --md-code-bg-color: #1f2224;
+    /* Code block text color */
+    --md-code-fg-color: #eeeeee;
+    /* Icon boxes with images border color */
+    --md-icon-box-border-color: black;
+    /* Icon boxes shadow color */
+    --md-hover-box-hover-shadow-color: #616161;
+    /* Header background color */
+    --md-header-background-color: #3e4547;
+    /* Header text color */
+    --md-header-fg-color: white;
+    /* Header menubar background color */
+    --md-header-menu-background-color: #3e4547;
 }
 
 [data-md-color-scheme="default"] {
-    /* --md-accent-fg-color: #004400; */
+    /* Accent color (used for permalink icons) */
+    --md-accent-fg-color: #B8232F;
+    /* Content background color */
     --md-default-bg-color: white;
+    /* H1 text color */
     --md-typeset-h1-color: #B8232F;
+    /* Hyperlink color */
     --md-link-highlight-color: #B8232F;
+    /* Hyperlink hover color */
+    --md-link-hover: #d02735;
+    /* Footer background color */
     --md-footer-bg-color: #232629;
+    /* MkDocs footer background color */
     --md-mkdocs-footer-bg-color: #232629;
+    /* Icon boxes with images border color */
     --md-icon-box-border-color: black;
-    --md-link-hover: #d02735
+    /* Icon boxes shadow color */
+    --md-hover-box-hover-shadow-color: #616161;
+    /* Header background color */
+    --md-header-background-color: #3e4547;
+    /* Header text color */
+    --md-header-fg-color: white;
+    /* Header menubar background color */
+    --md-header-menu-background-color: #3e4547;
 }
 
 .md-typeset h1 {
@@ -30,15 +65,15 @@
 
 .md-header {
     /* Top white bar */
-    background-color: #3e4547;
+    background-color: var(--md-header-background-color);
     height: 62px;
-    color: white;
+    color: var(--md-header-fg-color);
     padding-top: 6px;
 }
 
 .md-tabs {
     /* Horizontal menu bar */
-    background-color: #3e4547;
+    background-color: var(--md-header-menu-background-color);
 }
 
 .md-header-nav__title,
@@ -110,11 +145,6 @@
     font-weight: bold;
 }
 
-.md-footer-nav {
-    /* Footer navigation background */
-    background-color: #616161
-}
-
 .md-footer-meta.md-typeset {
     /* MKDocs footer background color */
     background-color: var(--md-mkdocs-footer-bg-color)
@@ -164,8 +194,8 @@ div.iconbox {
 
 div.banner:hover,
 div.iconbox:hover {
-    border-color: var(--md-link-highlight-color);
-    box-shadow: 0 8px 6px -6px #616161;
+    border-color: var(--md-link-hover);
+    box-shadow: 0 8px 6px -6px var(--md-icon-box-hover-shadow-color);
 }
 
 .caption {
@@ -179,10 +209,6 @@ div.iconbox:hover {
 
 a.assetlinks:visited {
     color: var(--md-typeset-h1-color);
-}
-
-[data-md-color-accent=blue] {
-    --md-accent-fg-color: hsla(354, 70%, 43%, 1)
 }
 
 .md-nav--primary .md-nav__title[for=__drawer] {
@@ -200,6 +226,9 @@ a.assetlinks:visited {
 }
 
 
-/*.md-nav__link[data-md-state=blur] {
-    color: var(--md-link-highlight-color);
-}*
+/* TO BE REMOVED */
+
+.md-footer-nav {
+    /* Footer navigation background */
+    background-color: #616161
+}
