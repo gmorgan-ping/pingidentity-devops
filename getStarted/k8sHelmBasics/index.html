@@ -1,0 +1,1276 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+    
+    
+      
+        <title>Kubernetes and Helm Basics - Ping Identity DevOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../mkdocs/overrides/stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-and-helm-basics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Ping Identity DevOps" class="md-header__button md-logo" aria-label="Ping Identity DevOps" data-md-component="logo">
+      <!-- Logo -->
+  
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ping Identity DevOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes and Helm Basics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/gmorgan-ping/pingidentity-devops" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gmorgan-ping/pingidentity-devops
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../readme/" class="md-tabs__link">
+        DevOps @ Ping
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getStarted/" class="md-tabs__link md-tabs__link--active">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../deployment/deploy/" class="md-tabs__link">
+        Deployment
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../releaseNotes/2107/" class="md-tabs__link">
+        Release Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Ping Identity DevOps" class="md-nav__button md-logo" aria-label="Ping Identity DevOps" data-md-component="logo">
+      <!-- Logo -->
+  
+    </a>
+    Ping Identity DevOps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/gmorgan-ping/pingidentity-devops" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gmorgan-ping/pingidentity-devops
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        DevOps @ Ping
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps @ Ping" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps @ Ping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../readme/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        Disclaimer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3rdPartySoftware/" class="md-nav__link">
+        Third-Party Software
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Get Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Get Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getStarted/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devopsRegistration/" class="md-nav__link">
+        DevOps Registration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kubernetes and Helm Basics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kubernetes and Helm Basics
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terms" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewing-resources" class="md-nav__link">
+    Viewing resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    Debugging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm" class="md-nav__link">
+    Helm
+  </a>
+  
+    <nav class="md-nav" aria-label="Helm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terms_1" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-helm-values-file" class="md-nav__link">
+    Building Helm Values File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands_1" class="md-nav__link">
+    Commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../localK8sCluster/" class="md-nav__link">
+        Local Kubernetes Cluster
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Deployment
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deployment" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deployment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/deploy/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment/collectMetricsWithSplunk/" class="md-nav__link">
+        Metrics/Logs - Splunk
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Release Notes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Release Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Release Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2107/" class="md-nav__link">
+        Current
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2106/" class="md-nav__link">
+        Version 2106
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2105/" class="md-nav__link">
+        Version 2105
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2104/" class="md-nav__link">
+        Version 2104
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2103/" class="md-nav__link">
+        Version 2103
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2102/" class="md-nav__link">
+        Version 2102
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2101/" class="md-nav__link">
+        Version 2101
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2012/" class="md-nav__link">
+        Version 2012
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2011/" class="md-nav__link">
+        Version 2011
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2010/" class="md-nav__link">
+        Version 2010
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2009/" class="md-nav__link">
+        Version 2009
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2008/" class="md-nav__link">
+        Version 2008
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2007/" class="md-nav__link">
+        Version 2007
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2006/" class="md-nav__link">
+        Version 2006
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2005/" class="md-nav__link">
+        Version 2005
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2004/" class="md-nav__link">
+        Version 2004
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releaseNotes/2003/" class="md-nav__link">
+        Version 2003
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terms" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewing-resources" class="md-nav__link">
+    Viewing resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging" class="md-nav__link">
+    Debugging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm" class="md-nav__link">
+    Helm
+  </a>
+  
+    <nav class="md-nav" aria-label="Helm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terms_1" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-helm-values-file" class="md-nav__link">
+    Building Helm Values File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands_1" class="md-nav__link">
+    Commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="kubernetes-and-helm-basics">Kubernetes and Helm Basics<a class="headerlink" href="#kubernetes-and-helm-basics" title="Permanent link"> ¶</a></h1>
+<p>This page cannot cover the depths of Kubernetes or Helm. However, we often deal with groups that are new to Kubernetes and Helm and reading other technical documentation may be too involved for our purposes. In this document will aim to arm newer kubernetes and helm consumers with helpful commands and terminology in simple terms with a focus on relevant commands. These concepts will use Ping Identity in DevOps as a background, but will generally apply to any interactions in Kubernetes. As such, this may feel incomplete or inaccurate to veterans. If you'd like to contribute, feel free to open a pull request!</p>
+<h2 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link"> ¶</a></h2>
+<h3 id="terms">Terms<a class="headerlink" href="#terms" title="Permanent link"> ¶</a></h3>
+<p><strong>Cluster</strong> -  The ice cube tray. </p>
+<p>View a "cluster" as a set of resources that you have access to deploy containers onto. A cluster can be as small as your local computer as big as hundreds of VMs, called Nodes,  in a data center. Interaction with the cluster requires authentication and RBAC is given to the authenticated identity within the cluster. 
+In a cloud provider Kubernetes cluster (AWS EKS, Azure AKS, Google GKE) the cluster can span multiple Avalability zones, but only <em>one</em> region. In AWS terms, a cluster can be in the region us-west-2, but have nodes in Availability Zones (AZs) us-west-2a, us-west-2b, and us-west-2c. Kubernetes natually helps with high availability by distributing applications with multiple instacnces (called replicas) across avaiable AZs.</p>
+<p><strong>Nodes</strong> - The individual ice cube spaces. </p>
+<p>The pieces that provide allocatable resources (namely CPU and Memory) and make up a cluster. Typically these are VMs. In AWS it would be ec2 instances.</p>
+<p><strong>Namespace</strong> - A loosely defined "slice" of the cluster. Meant to be an area scoped for grouped applications to be deployed. It is possible to allocate resource limits available to a namespace, but this isn't needed. </p>
+<p><strong>Context</strong> - Definition in your ~/.kube/config file that specifies which cluster and namespace your <code>kubectl</code> commands will be sent to. </p>
+<p><strong>Deployments and Statefulsets</strong> - The drops of water that fill ice cube spots. </p>
+<p>Applications are deployed as Deployments or Statefulsets depending on if they require persistent storage or not. Think of these as controllers that define and manage the: </p>
+<ul>
+<li>name of an application</li>
+<li>number of instances of an application (replicas)</li>
+<li>persistent storage</li>
+</ul>
+<p><strong>Pod</strong> - The molecules that make up drops of water. </p>
+<p>A Deployment may define the <em>amount</em> of pods, but each one is defined the exact same. For example, you may have a <code>pingfederate-engine</code> deployment that calls for three replicas with 2 CPUs and 2gb of Memory and that is what you will get. You cannot make one engine bigger or smaller than the others. Like a molecule, a pod may be made of just one container, or it can have multiple containers - called sidecars. For Example, your pod may have a pingfederate container as the main process, but a sidecar container like Splunk Universal Forwarder that is used export logs. Sidecar containers will not overlap ports because they interact with each other using localhost. Each pod has it's own IP. </p>
+<p><strong>PersistentVolume and PersistentVolumeClaim</strong> - Simply put, this is an external stoage device/definition that is attached to a container. For Ping Identity applications and in general, when an application requires persistent storage it is managed by a resource called StatefulSet. For example, PingDirectory is a data store with its own database, as such, each instance of PingDirectory needs it's own persistent storage (to avoid database locking conflicts). A StatefulSet is a type of kubernetes resource that has a lot of nice orchestration for stateful applications: </p>
+<ul>
+<li>predictable naming - myping-pingdirectory-0, myping-pingdirectory-1, myping-pingdirectory-2. </li>
+<li>Health priority - deploys the first instance and waits for it to be healthy before adding another one. Also, all rolling updates occur to instances one at a time starting with the last one (e.g. myping-pingdirectory-2) first. </li>
+<li>Persistent Storage per instance - If persistent storage </li>
+</ul>
+<p><strong>Service</strong> - A slim LoadBalancer within the cluster. Services provide a single IP put in front of Deployments and Statefulsets to distrubute traffic. Backchannel communication, like PingFederate using PingDirectory as a user store, should always point to a service name/port rather than the individual pods. Services are given FQDNs in a cluster. Within the same namespace, services are accessible by their name (e.g <code>https://myping-pingdirectory:443</code>), but accross namespaces you must be more explicit (<code>https://myping-pingdirectory.&lt;namespace&gt;:443</code>). An FQDN would be `https://myping-pingdirectory.<namespace>.svc.cluster.local</p>
+<p><strong>Ingress</strong> - A definition used to expose an application outside of the cluster. In order for this to work, you need an Ingress Controller. A common pattern is a deployment of Nginx pods fronted by a physical LoadBalancer. Where client application traffic hits the Loadbalancer is forwarded to Nginx, is evaluated based on the hostname header and path and forwarded to a corresponding application. For example a Pingfederate ingress may have a hostname of myping-pingfederate-engine.ping-local.com. If a client app makes a request to https://myping-pingfederate-engine.ping-local.com/pf/heartbeat.ping the traffic follows like: Client -&gt; LoadBalancer -&gt; NGinx -&gt; pingfederate-engine. More Specifically: Client -&gt; LoadBalancer (Nginx k8s Service) -&gt; Nginx Pod -&gt; Pingfederate-engine k8s Service -&gt; Pingfederate-engine pod. </p>
+<h3 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link"> ¶</a></h3>
+<p>See which cluster and namespace you are using:
+Easy tool - <a href="https://github.com/ahmetb/kubectx#installation">kubectx</a></p>
+<p>Alternatively</p>
+<div class="highlight"><pre><span></span><code>kubectl config get-contexts
+kubectl config current-context
+kubectl config use-context my-cluster-name
+
+<span class="c1"># Set Namespace</span>
+kubectl config set-context --current --namespace<span class="o">=</span>&lt;namespace&gt;
+</code></pre></div>
+<h4 id="viewing-resources">Viewing resources<a class="headerlink" href="#viewing-resources" title="Permanent link"> ¶</a></h4>
+<p>You may prefer to use <a href="https://github.com/derailed/k9s">k9s</a> - a great UI built directly into terminal. </p>
+<p>If you cannot use k9s, here we'll discuss standard commands. </p>
+<p>You can <code>kubectl get</code> any <a href="https://kubernetes.io/docs/reference/kubectl/overview/#resource-types">resource type</a>. (pods, deployments, statefulsets, persistentvolumeclaims). Use shortnames! po - pods, deploy - deployments, sts - statefulsets, ing - ingresses, pvc - persistentvolumeclaims</p>
+<p>The most common - get pods. </p>
+<div class="highlight"><pre><span></span><code>kubectl get pods
+</code></pre></div>
+<p>Logs, this shows anything that the container prints to stdout. </p>
+<div class="highlight"><pre><span></span><code>kubectl logs -f &lt;pod-name&gt;
+</code></pre></div>
+<p>Pod with multiple containers:</p>
+<div class="highlight"><pre><span></span><code>kubectl logs -f &lt;pod-name&gt; -c &lt;container-name&gt;
+</code></pre></div>
+<p>Logs of a crashed pod (RESTARTS != 0)</p>
+<div class="highlight"><pre><span></span><code>kubectl logs -f &lt;pod-name&gt; --previous
+</code></pre></div>
+<p>See available hostnames by ingress</p>
+<div class="highlight"><pre><span></span><code>kubectl get ing
+</code></pre></div>
+<h4 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link"> ¶</a></h4>
+<p>When a has crashed surprisingly, we want to first identify why. </p>
+<p>View logs of the crash: </p>
+<div class="highlight"><pre><span></span><code>kubectl logs -f &lt;pod-name&gt; --previous
+</code></pre></div>
+<p>View the reason for exit:</p>
+<div class="highlight"><pre><span></span><code>kubectl describe pod &lt;pod-name&gt;
+</code></pre></div>
+<p>When looking at describe, there two main areas to look: </p>
+<ul>
+<li>Last State - will should the reason for exit and exit code. 
+   Common Exit codes: 
+   Exit Codes</li>
+</ul>
+<p>Common exit codes associated with containers are:</p>
+<table>
+<thead>
+<tr>
+<th>Exit Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exit Code 0</td>
+<td>Absence of an attached foreground process</td>
+</tr>
+<tr>
+<td>Exit Code 1</td>
+<td>Indicates failure due to application error</td>
+</tr>
+<tr>
+<td>Exit Code 137</td>
+<td>Indicates failure as container received SIGKILL (Manual intervention or ‘oom-killer’ [OUT-OF-MEMORY])</td>
+</tr>
+<tr>
+<td>Exit Code 139</td>
+<td>Indicates failure as container received SIGSEGV</td>
+</tr>
+<tr>
+<td>Exit Code 143</td>
+<td>Indicates failure as a container recieved SIGTERM</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Events -  The Events list is most helpful when your pod is not even getting created. Perhaps it is stuck in <code>pending</code> state :<ul>
+<li>There may not be enough resources available for the pod to get created</li>
+<li>something about the pod definition is incorrect. There may be a missing volume or secret. </li>
+</ul>
+</li>
+</ul>
+<h2 id="helm">Helm<a class="headerlink" href="#helm" title="Permanent link"> ¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">PingIdentity Devops and Helm</p>
+<p>All of our examples and guidance will focus on the usage of our <a href="helm.pingidentity.com">PingIdentity DevOps Helm chart</a>. If you do not wish to or cannot use the PingIdentity DevOps Helm chart in production, it is still recommended to at least use it for generating your direct Kubernetes manifest files. This will give Ping Identity the best oportunity to support your environment.</p>
+</div>
+<p>Everything in kubernetes is deployed by defining what is desired and allowing kubernetes to achieve the desired state. </p>
+<p>Helm simplifies consumer (your) interaction by building deployment patterns into templates with variables. A Helm chart includes kubernetes templates <em>and</em> default values (maintained by Ping Identity in this case). So all you have to worry about is providing values to the template variables that matter to you. </p>
+<p>For example, a service definition looks like: </p>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: myping
+    app.kubernetes.io/name: pingdirectory
+  name: myping-pingdirectory
+spec:
+  ports:
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 1443
+  - name: ldap
+    port: 389
+    protocol: TCP
+    targetPort: 1389
+  - name: ldaps
+    port: 636
+    protocol: TCP
+    targetPort: 1636
+  selector:
+    app.kubernetes.io/instance: myping
+    app.kubernetes.io/name: pingdirectory
+  type: ClusterIP
+</code></pre></div>
+<p>Here, we ask kubernetes to create a <code>service</code> resource with the name <code>myping-pingdirectory</code>. </p>
+<p>With Helm this entire resource, along with all other required resources for a basic deployment, would be automatically defined just by setting <code>pingdirectory.enabled=true</code>. </p>
+<h3 id="terms_1">Terms<a class="headerlink" href="#terms_1" title="Permanent link"> ¶</a></h3>
+<p><strong>Manifests</strong> - the final kubernetes yaml files that are sent to the cluster for resource creation. Looks like the service defined above. </p>
+<p><strong>Helm Templates</strong> - Go Template versions of kubernetes yaml files. </p>
+<p><strong>Values and values.yaml</strong> - the setting that you pass to a helm chart so the templates will product manifests that you want. Values can be passed one by one, but more commonly they are put on a file called values.yaml</p>
+<div class="highlight"><pre><span></span><code><span class="nt">pingdirectory</span><span class="p">:</span>
+  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>This is a very simple values yaml that would produce a kubernetes minifest file over 200 lines long. </p>
+<p><strong>release</strong> - When you deploy <em>something</em> with Helm, you provide a name for identification. This name and the resources deployed along with it make up a <code>release</code>. It is a common pattern to prefix all of the resources managed by a release with the release name. In our examples we will use <code>myping</code> as the release name, so you will see products running with names like: <code>myping-pingfederate-admin</code>, <code>myping-pindirectory</code>, <code>myping-pingauthorize</code>. </p>
+<h3 id="building-helm-values-file">Building Helm Values File<a class="headerlink" href="#building-helm-values-file" title="Permanent link"> ¶</a></h3>
+<p>This documentation focuses on the <a href="#helm">PingIdentity DevOps Helm chart</a> and the values passed to the helm chart in order to achieve your configuration. Which means to have your deployment fit your goals, you will build a <a href="https://helm.sh/docs/chart_template_guide/values_files/">values.yaml</a>. </p>
+<p>The most simple values.yaml for our helm chart could look like: </p>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span> 
+  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>By default, <code>global.enabled=false</code>, so these two lines are enough to turn on every available PingIdentity software product with a basic configuration. </p>
+<p>In documentation you may find an example for providing your own server profile via Github to PingDirectory and a snippet of values.yaml specific <em>only</em> to that feature:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">pingdirectory</span><span class="p">:</span>
+  <span class="nt">envs</span><span class="p">:</span>
+    <span class="nt">SERVER_PROFILE_URL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/&lt;your-github-user&gt;/pingidentity-server-profiles</span>
+</code></pre></div>
+<p>This yaml alone will not even turn on PingDirectory, because the default value for <code>pingdirectory.enabled</code> is set to false. To take advantage of the feature, you want to merge this snippet into your own values.yaml to where you end up with: </p>
+<div class="highlight"><pre><span></span><code><span class="nt">global</span><span class="p">:</span>
+  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">pingdirectory</span><span class="p">:</span>
+  <span class="nt">envs</span><span class="p">:</span>
+    <span class="nt">SERVER_PROFILE_URL</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/&lt;your-github-user&gt;/pingidentity-server-profiles</span>
+</code></pre></div>
+<p>This values.yaml turns on <em>all</em> products including PingDirectory, <em>and</em> overwrites the default <code>pingdirectory.envs.SERVER_PROFILE_URL</code> to use <code>https://github.com/&lt;your-github-user&gt;/pingidentity-server-profiles</code>. </p>
+<p>As you see, helm simplifies what you have to include for deployment, but as you want to be more customized you will want to see what options are available. To see all options available:</p>
+<div class="highlight"><pre><span></span><code>helm show values pingidenity/ping-devops
+</code></pre></div>
+<p>This will print all the default values that are applied for you, so if you want to overwrite any of it, just copy the snippet out and include it in your own values.yaml. Keep in mind, tabbing and spacing matters. If you copy all the way to the left margin, and paste at the very beginning of a line in your text editor, this should maintain proper indentation. </p>
+<p>Helm also provides a wide variety of plugins. One particularly helpful one is <a href="https://github.com/databus23/helm-diff">helm diff</a>. </p>
+<p>This plugin shows what changes will happen between helm upgrade commands. 
+If anything in a deployment or statefulset shows a change, expect the corresponding pods to be rolled. This is helpful to watch out for a change when you are not prepared for containers to be restarted. </p>
+<h3 id="commands_1">Commands<a class="headerlink" href="#commands_1" title="Permanent link"> ¶</a></h3>
+<p>As you go though our examples, your goal will be to build a values.yaml file that works for you. The </p>
+<p>Deploy a release. </p>
+<div class="highlight"><pre><span></span><code>helm upgrade --install &lt;release_name&gt; pingidentity/ping-devops -f /path/to/values.yaml
+</code></pre></div>
+<p>Clean up a release. </p>
+<div class="highlight"><pre><span></span><code>helm uninstall &lt;release name&gt;
+</code></pre></div>
+<p>Delete PVCs associated to a release</p>
+<div class="highlight"><pre><span></span><code>kubectl delete pvc --selector=app.kubernetes.io/instance=&lt;release_name&gt;
+</code></pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../devopsRegistration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: DevOps Registration" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              DevOps Registration
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../localK8sCluster/" class="md-footer__link md-footer__link--next" aria-label="Next: Local Kubernetes Cluster" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Local Kubernetes Cluster
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © Copyright 2021 Ping Identity
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      
+    
+  </body>
+</html>
